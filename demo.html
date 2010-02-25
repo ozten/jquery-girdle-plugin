@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head><title>test page for nav.js code</title>
+<style type="text/css">
+/* Two style used by jquery.girdle */
+.overflow-preview {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 150px;
+}
+.overflow-popup {
+    position: absolute;
+    overflow: auto;
+    white-space: auto;
+    width: auto;
+    border: none;
+}
+
+/* CSS Below here isn't important to jquery.girdle */
+.cellular {
+    background-color: #FFFFFF; float: left; border: solid 1px black; padding: 1em;
+}
+p{ clear: both; }
+</style>
+</head>
+<body>
+<h1>JQuery Girdle Plugin</h1>
+<p>Hide that unsightly content that is busting at the seams
+   in a fashionable girdle </p>
+<p><strong>DOM requirements</strong> - put your content in two containers. Style the outer one to hide the content
+        properly.</p>
+<p><strong>CSS requirements</strong> - make a 'preview' and a 'fullview' class. Preview should limit what is displayed
+        and fullview styles the popup.</p>
+
+
+<h2>Demo Basic</h2>
+<div class="content"><!-- The idea is that cellular data has a fixed size, say a table of data -->
+  <div class="cellular"><span>Being loquacious, I often overflow my alloted time and space.</span></div>
+  <div class="cellular">Terse and Consise.</div>
+</div>
+
+
+
+<p>View Souce on this page to see CSS and JS Snippet</p>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+<script type='text/javascript' src='jquery.girdle.js'></script>
+<script type='text/javascript''>
+/* And here is how to hook it up */
+$(document).ready(function(){
+    $('.cellular').girdle({previewClass:  'overflow-preview',
+                           fullviewClass: 'overflow-popup'});
+});
+</script>
+</body>
+</html>
