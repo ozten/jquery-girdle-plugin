@@ -3,7 +3,7 @@
  * Tri-Licensed: MPL 1.1, GPL 2.0, or LGPL 2.1
  * version 0.1
  */
-/*jslint browser:true */ /*global jQuery*/
+/*jslint browser:true */ /*global jQuery, window*/
 jQuery.fn.girdle = function (options) {
     var opts = jQuery.extend({}, jQuery.fn.girdle.defaults, options);
     return this.each(function () {
@@ -14,7 +14,7 @@ jQuery.fn.girdle = function (options) {
             var popup = null,
                 fadeOutTimer = 0, 
                 fadeInTimer = 0,
-	        displayPopup,
+                displayPopup,
                 removePopup,
                 clearFadeInTimeout,
                 startFadeOutTimeout,
@@ -24,12 +24,12 @@ jQuery.fn.girdle = function (options) {
                 var left, zIndex;
                 popup = preview.clone();
                 popup.removeClass(opts.previewClass).addClass(opts.fullviewClass);
-	        left = preview.position().left;
+                left = preview.position().left;
                 zIndex = jQuery.fn.girdle.calculateZIndex(preview);
 
                 popup.css({position: 'absolute',
-	                   left: left + 'px',
-	                   'z-index': zIndex});
+                           left: left + 'px',
+                           'z-index': zIndex});
                 popup.insertBefore(preview).fadeIn(opts.fadeIn); //TODO make opts
 
                 preview.unbind("mouseleave", clearFadeInTimeout);
@@ -43,7 +43,7 @@ jQuery.fn.girdle = function (options) {
                         popup.remove();
                         popup = null;
                     }); 
-            };
+                };
             clearFadeInTimeout = function () {
                 // User didn't really want to show the popup
                 preview.unbind("mouseleave", clearFadeInTimeout);
@@ -94,12 +94,13 @@ jQuery.fn.girdle = function (options) {
  * @param jQuery elemnt - The preview element
  * @return integer - The new z-index appropriate for the popup element
  */
-jQuery.fn.girdle.calculateZIndex = function(preview) {
+jQuery.fn.girdle.calculateZIndex = function (preview) {
     var zIndex = 'auto',
         parent = preview,
-        DEFAULT_Z_INDEX = 2;
-    while (zIndex == 'auto' && parent && ! parent.is('body')) {
-        var el = parent.get(0);
+        DEFAULT_Z_INDEX = 2,
+        el;
+    while (zIndex === 'auto' && parent && ! parent.is('body')) {
+        el = parent.get(0);
         if (el.currentStyle) { // IE
             zIndex = el.currentStyle['z-index'];
         } else if (window.getComputedStyle) {
@@ -110,12 +111,12 @@ jQuery.fn.girdle.calculateZIndex = function(preview) {
 
         parent = parent.parent();
     }
-    if (zIndex == 'auto') {
+    if (zIndex === 'auto') {
         return DEFAULT_Z_INDEX;
     } else {
-        return parseInt(zIndex) + 1;
+        return parseInt(zIndex, 10) + 1;
     }
-}
+};
 jQuery.fn.girdle.defaults = {
     previewClass:  'girdle-preview',
     fullviewClass: 'girdle-popup',
