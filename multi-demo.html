@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head><title>test page for nav.js code</title>
+<style type="text/css">
+/* Two style used by jquery.girdle */
+.overflow-preview {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 150px;
+}
+.overflow-popup {
+    overflow: auto;
+    white-space: auto;
+    width: auto;
+    border: none;
+}
+
+/* CSS Below here isn't important to jquery.girdle */
+.cellular {
+    background-color: #FFFFFF; float: left; border: solid 1px black; padding: 1em;
+}
+p{ clear: both; }
+</style>
+</head>
+<body>
+<h1>JQuery Girdle Plugin Multiple Demos</h1>
+<p>This is a test page for various CSS layout techniques and how you can use Girdle</p>
+
+<h2>Simple Blocks floating left</h2>
+<p>A couple of blocks floating left. Girdle content wrapped in a span for performance boost.</p>
+<div class="content"><!-- The idea is that cellular data has a fixed size, say a table of data -->
+  <div id="a" class="cellular"><span style="padding: 3em">Being loquacious, I often overflow my alloted time and space.</span></div>
+  <div id="b" class="cellular"><span>Terse and Consise.</span></div>
+</div>
+
+
+
+<p>View Souce on this page to see CSS and JS Snippet</p>
+<p><a href="http://github.com/ozten/jquery-girdle-plugin">Project Source Code</a> on GitHub</p>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+<script type='text/javascript' src='jquery.girdle.js'></script>
+<script type='text/javascript''>
+/* And here is how to hook it up */
+$(document).ready(function(){
+    var example1opts = {
+      previewClass:  'overflow-preview', fullviewClass: 'overflow-popup',
+      fadeIn: 'fast',                    fadeOut: 'fast',
+      fadeInDelay: 200,                  fadeOutDelay: 200
+    };
+    $('.cellular').girdle(example1opts);
+});
+</script>
+<a href="http://github.com/ozten/jquery-girdle-plugin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub" /></a>
+</body>
+</html>
