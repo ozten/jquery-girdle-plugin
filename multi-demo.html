@@ -20,7 +20,12 @@
     background-color: #FFFFFF; float: left; border: solid 1px black; padding: 1em;
 }
 p{ clear: both; }
+h2 { clear: both; }
 </style>
+<!-- Note script tags, old school HTML, and inline CSS are for clarity of the demo
+     and are not the best way to deploy your app -->
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+<script type='text/javascript' src='jquery.girdle.js'></script>
 </head>
 <body>
 <h1>JQuery Girdle Plugin Multiple Demos</h1>
@@ -32,24 +37,66 @@ p{ clear: both; }
   <div id="a" class="cellular"><span style="padding: 3em">Being loquacious, I often overflow my alloted time and space.</span></div>
   <div id="b" class="cellular"><span>Terse and Consise.</span></div>
 </div>
-
-
-
-<p>View Souce on this page to see CSS and JS Snippet</p>
-<p><a href="http://github.com/ozten/jquery-girdle-plugin">Project Source Code</a> on GitHub</p>
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
-<script type='text/javascript' src='jquery.girdle.js'></script>
 <script type='text/javascript''>
-/* And here is how to hook it up */
-$(document).ready(function(){
-    var example1opts = {
+var example1opts = {
       previewClass:  'overflow-preview', fullviewClass: 'overflow-popup',
       fadeIn: 'fast',                    fadeOut: 'fast',
       fadeInDelay: 200,                  fadeOutDelay: 200
     };
-    $('.cellular').girdle(example1opts);
-});
+$('.cellular').girdle(example1opts);
 </script>
+
+<h2>Tabular Data</h2>
+<table width="600" border="1" cellspacing="0" cellpadding="3"><!-- Take me back to 1997 baby -->
+<tr><th width="200">a</th>           <th width="100">b</th>                            <th width="291">c</th></tr>
+<tr><td>sdlfkjsdjf</td>              <td width="100"><div class="portly">abcdsdkljf sdfkjd kjsdf</div></td>              <td>skdjfsldkjf</td></tr>
+<tr><td>sdkfj</td>                   <td width="100"><div class="portly">b</div></td>              <td>lsdfjsdlfj slkdfjsdkjf sdlf</td></tr>
+<tr><td>ksldkfjsdkfjsdlkjfklsdjf</td><td width="100"><div class="portly">lasdlklksdjklkl sdlkfsdfjk k</div></td>              <td>sldfjsdklfjlsjdfklsjdf</td></tr>
+</table>
+<style type="text/css">
+.portly {
+    padding: 0.3em;
+}
+.portly-preview {
+    color: red;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 94px;
+}
+.portly-popup {
+    color: green;
+    background-color: yellow;
+}
+</style>
+<script type='text/javascript''>
+$('.portly').girdle({previewClass: 'portly-preview', fullviewClass:'portly-popup'});
+</script>
+
+<h2>Height Constrained</h2>
+<ul id="visual-menu"><li>sldkjf sdfkljsdf lksdjfsdflsdk lsdkfjd d sldkf sdkfjsdklfj sdlkfjsdlfk sdjkl sdklfj sdlkfjsdklfj klsdjf </li>
+    <li>TODO these would be images</li>
+    <li>really fun ones</li>
+</ul>
+<style type="text/css">
+#visual-menu li { 
+    background-color: #FFF;
+    color: #AAA;
+    width: 100px;
+    border: solid 2px #CCC;
+}
+.visual-menu-preview {
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.5;
+    height: 1em;
+}
+</style>
+<script type='text/javascript''>
+$('#visual-menu li').girdle({previewClass: 'visual-menu-preview'});
+</script>
+
+<p>View Souce on this page to see CSS and JS Snippet</p>
+<p><a href="http://github.com/ozten/jquery-girdle-plugin">Project Source Code</a> on GitHub</p>
 <a href="http://github.com/ozten/jquery-girdle-plugin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub" /></a>
 </body>
 </html>

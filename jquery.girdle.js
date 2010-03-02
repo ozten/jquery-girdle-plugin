@@ -40,8 +40,14 @@ jQuery.fn.girdle = function (options) {
                         popup.unbind("mouseenter", clearFadeOutTimeout);
                         // Reboots this cycle
                         preview.bind("mouseenter", startFadeInTimeout);
-                        popup.remove();
-                        popup = null;
+                        if (opts.debug) {
+                            if (window.console) {
+                                console.info("Leaving popup in the DOM", popup);
+                            }
+                        } else {
+                            popup.remove();
+                            popup = null;
+                        }
                     }); 
                 };
             clearFadeInTimeout = function () {
@@ -118,6 +124,7 @@ jQuery.fn.girdle.calculateZIndex = function (preview) {
     }
 };
 jQuery.fn.girdle.defaults = {
+    debug: false,
     previewClass:  'girdle-preview',
     fullviewClass: 'girdle-popup',
     fadeIn: 'slow',
