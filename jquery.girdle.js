@@ -21,8 +21,15 @@ jQuery.fn.girdle = function (options) {
                 clearFadeOutTimeout;
 
             displayPopup = function () {
+                var left, zIndex;
                 popup = preview.clone();
                 popup.removeClass(opts.previewClass).addClass(opts.fullviewClass);
+	        left = preview.position().left;
+                zIndex = jQuery.fn.girdle.calculateZIndex(preview);
+
+                popup.css({position: 'absolute',
+	                   left: left + 'px',
+	                   'z-index': zIndex});
                 popup.insertBefore(preview).fadeIn(opts.fadeIn); //TODO make opts
 
                 preview.unbind("mouseleave", clearFadeInTimeout);
@@ -76,6 +83,40 @@ jQuery.fn.girdle = function (options) {
 
     }); // return this.each
 }; // jQuery.fn.girdle
+/**
+ * Determines the proper z-index for the popup elment. It should be 
+ * 1 more than the 'preview' elment. It recursively checks the parents
+ * of preview.
+ * 
+ * TODO: Does this method already exist in jQuery?
+ * @param jQuery elemnt - The preview element
+ * @return integer - The new z-index appropriate for the popup element
+ */
+jQuery.fn.girdle.calculateZIndex = function(preview) {
+    var zIndex = 'auto',
+        parent = preview,
+        DEFAULT_Z_INDEX = 2;
+    while (zIndex == 'auto' && parent && ! parent.is('body')) {
+        console.info('parent=', parent);
+        var el = parent.get(0);
+        if (el.currentStyle) { // IE
+            zIndex = el.currentStyle['z-index'];
+        } else if (window.getComputedStyle) {
+            console.info('computing ', el);
+            zIndex = document.defaultView.getComputedStyle(el, null).getPropertyValue('z-index');
+        } else {
+            return DEFAULT_Z_INDEX;
+        }
+
+        parent = parent.parent();
+        console.info(zIndex, el, parent);
+    }
+    if (zIndex == 'auto') {
+        return DEFAULT_Z_INDEX;
+    } else {
+        return parseInt(zIndex) + 1;
+    }
+}
 jQuery.fn.girdle.defaults = {
     previewClass:  'girdle-preview',
     fullviewClass: 'girdle-popup',
