@@ -67,7 +67,9 @@ jQuery.fn.girdle = function (options) {
             };
 
             // Do we really need a girdle or are we svelte enough?
-            if (preview.width() - preview.children().width() > 10) {
+            if (preview.children().size() > 0 &&
+                preview.width() - preview.children().width() > 10) {
+                //preview.outerWidth() - preview.children().outerWidth() > 10) {
                 return;
             }
 
@@ -97,19 +99,16 @@ jQuery.fn.girdle.calculateZIndex = function(preview) {
         parent = preview,
         DEFAULT_Z_INDEX = 2;
     while (zIndex == 'auto' && parent && ! parent.is('body')) {
-        console.info('parent=', parent);
         var el = parent.get(0);
         if (el.currentStyle) { // IE
             zIndex = el.currentStyle['z-index'];
         } else if (window.getComputedStyle) {
-            console.info('computing ', el);
             zIndex = document.defaultView.getComputedStyle(el, null).getPropertyValue('z-index');
         } else {
             return DEFAULT_Z_INDEX;
         }
 
         parent = parent.parent();
-        console.info(zIndex, el, parent);
     }
     if (zIndex == 'auto') {
         return DEFAULT_Z_INDEX;

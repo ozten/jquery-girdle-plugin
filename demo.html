@@ -9,7 +9,6 @@
     width: 150px;
 }
 .overflow-popup {
-    position: absolute;
     overflow: auto;
     white-space: auto;
     width: auto;
@@ -27,21 +26,18 @@ p{ clear: both; }
 <h1>JQuery Girdle Plugin</h1>
 <p>Hide that unsightly content that is busting at the seams
    in a fashionable girdle </p>
-<p><strong>DOM requirements</strong> - put your content in two containers. Style the outer one to hide the content
-        properly.</p>
 <p><strong>CSS requirements</strong> - make a 'preview' and a 'fullview' class. Preview should limit what is displayed
         and fullview styles the popup.</p>
 
 
 <h2>Demo Basic</h2>
 <div class="content"><!-- The idea is that cellular data has a fixed size, say a table of data -->
-  <div class="cellular"><span>Being loquacious, I often overflow my alloted time and space.</span></div>
+  <div class="cellular">Being loquacious, I often overflow my alloted time and space.</div>
   <div class="cellular">Terse and Consise.</div>
 </div>
 
-
-
 <p>View Souce on this page to see CSS and JS Snippet</p>
+<p><a href="multi-demo.html">Multiple demos</a> shows various uses.</p>
 <p><a href="http://github.com/ozten/jquery-girdle-plugin">Project Source Code</a> on GitHub</p>
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
 <script type='text/javascript' src='jquery.girdle.js'></script>
